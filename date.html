@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Day of birth</title>
+    <link rel="stylesheet" href="date.css">
+</head>
+<body>
+    <div class="container">
+        <div class="cancle">X</div>
+        <div class="main">
+            <div class="enter">Enter Birth Details</div>
+            <div class="all">
+            <input type="text" name="" id="date" placeholder="Date">
+            <input type="text" name="" id="month" placeholder="Month">
+            <input type="text" name="" id="year" placeholder="Year">
+            </div>
+            <button class="check">Check Birth Day</button>
+            <div class="list hidden">
+                <button>Jan</button>
+                <button>feb</button>
+                <button>Mar</button>
+                <button>Apr</button>
+                <button>May</button>
+                <button>Jun</button>
+                <button>Jul</button>
+                <button>Aug</button>
+                <button>Sep</button>
+                <button>Oct</button>
+                <button>Nov</button>
+                <button>Dec</button>
+            </div>
+        </div>
+        <div class="display hidden"></div>
+    </div>
+    <script>
+        let date_box=document.querySelector("#date")
+        let month_box=document.querySelector("#month")
+        let year_box=document.querySelector("#year")
+        let check=document.querySelector(".check")
+        let list=document.querySelector(".list")
+        let display=document.querySelector(".display")
+        let cancle=document.querySelector(".cancle")
+
+        
+        cancle.onclick=function(){
+            display.classList.add("hidden")
+            display.classList.remove("show")
+            list.classList.add("hidden")
+            month_box.value=''
+            date_box.value=''
+            year_box.value=''
+        }
+
+        month.onclick=function(){
+            list.classList.remove("hidden")  
+        }
+        // list.addEventListener("click",(e)=>{
+        //     btn=e.target
+        //     month.value=btn.innerText
+        //     list.classList.add("hidden")
+        // })
+
+        list.onclick=function(e){
+            month_box.value=e.target.innerText           
+            list.classList.add("hidden")
+        }
+
+        check.onclick=function(){
+            let date=date_box.value
+            let month_inp=month_box.value.toLowerCase().slice(0,3)
+            let year=year_box.value
+            if((date>0 && date<=31 && year.length==4) || month_inp<=12){
+                let s=4
+                let y=year.slice(2)
+                let int_year=Number(year)
+                display.classList.add("show")
+                display.classList.remove("hidden")
+                
+                if(month_inp=='jan' || month_inp==1){
+                    m=0
+                    }
+                else if(month_inp=='feb' || month_inp==2){
+                    m=3
+                    }
+                else if(month_inp=='mar' || month_inp==3){
+                    m=3
+                    }
+                else if(month_inp=='apr' || month_inp==4){
+                    m=6
+                    }
+                else if(month_inp=='may' || month_inp==5){
+                    m=1
+                    }
+                else if(month_inp=='jun' || month_inp==6){
+                    m=4
+                    }
+                else if(month_inp=='jul' || month_inp==7){
+                    m=6
+                    }
+                else if(month_inp=='aug' || month_inp==8){
+                    m=2
+                    }
+                else if(month_inp=='sep' || month_inp==9){
+                    m=5
+                    }
+                else if(month_inp=='oct' || month_inp==10){
+                    m=0
+                    }
+                else if(month_inp=='nov' || month_inp==11){
+                    m=3
+                    }
+                else if(month_inp=='dec' || month_inp==12){
+                    m=5               
+                    }   
+               
+                if(1900<=int_year && int_year<=1999){
+                    let quot=Math.floor(Number(y)/s)
+                    let rem=(Number(y%2))
+                    let sum=(Number(quot)+Number(date)+Number(m)+0+Number(y))
+                        if((int_year%4==0 && int_year%100!=0) || (int_year%400==0)){
+                            if(month_box.value=='Jan' || month_box.value=='feb'){
+                                if(sum%7==0){
+                                    display.innerText="you'r born on- Saturday"
+                                    }
+                                else if(sum%7==1){
+                                    display.innerText="you'r born on- Sunday"
+                                    }
+                                else if(sum%7==2){
+                                    display.innerText="you'r born on- Monday"
+                                    }
+                                else if(sum%7==3){
+                                    display.innerText="you'r born on- Tuesday"
+                                    }
+                                else if(sum%7==4){
+                                    display.innerText="you'r born on- Wednesday"
+                                    }
+                                else if(sum%7==5){
+                                    display.innerText="you'r born on- Thursday"
+                                    }
+                                else if(sum%7==6){
+                                    display.innerText="you'r born on- Friday"
+                                    }
+                                }
+
+                            else{
+                                if(sum%7==0){
+                                    display.innerText="you'r born on- Sunday"
+                                    }
+                                else if(sum%7==1){
+                                    display.innerText="you'r born on- Monday"
+                                    }
+                                else if(sum%7==2){
+                                    display.innerText="you'r born on- Tuesday"
+                                    }
+                                else if(sum%7==3){
+                                    display.innerText="you'r born on- Wednesday"
+                                    }
+                                else if(sum%7==4){
+                                    display.innerText="you'r born on- Thursday"
+                                    }
+                                else if(sum%7==5){
+                                    display.innerText="you'r born on- Friday"
+                                    }
+                                else if(sum%7==6){
+                                    display.innerText="you'r born on- Saturday"
+                                    }
+                                }
+                            }
+                    
+                    else{
+                        if(sum%7==0){
+                            display.innerText="you'r born on- Sunday"
+                            }
+                        else if(sum%7==1){
+                            display.innerText="you'r born on- Monday"
+                            }  
+                        else if(sum%7==2){
+                            display.innerText="you'r born on- Tuesday"
+                            }
+                        else if(sum%7==3){
+                            display.innerText="you'r born on- Wednesday"
+                            }
+                        else if(sum%7==4){
+                            display.innerText="you'r born on- Thursday"
+                            }
+                        else if(sum%7==5){
+                            display.innerText="you'r born on- Friday"
+                            }
+                        else if(sum%7==6){
+                            display.innerText="you'r born on- Saturday"
+                            }   
+                        }
+                    }   
+          
+                if(2000<=int_year && int_year<=2099){
+                    let quot=Math.floor(Number(y)/s)
+                    let rem=(Number(y%2))
+                    let sum=(Number(quot)+Number(date)+Number(m)+6+Number(y))
+                        if(int_year%4==0 && int_year%100!=0 || int_year%400==0){
+                            if(month_box.value=='Jan' || month_box.value=='feb'){
+                                if(sum%7==0){
+                                    display.innerText="you'r born on- Saturday"
+                                    }
+                                else if(sum%7==1){
+                                    display.innerText="you'r born on- Sunday"
+                                    }
+                                else if(sum%7==2){
+                                    display.innerText="you'r born on- Monday"
+                                    }
+                                else if(sum%7==3){
+                                    display.innerText="you'r born on- Tuesday"
+                                    }
+                                else if(sum%7==4){
+                                    display.innerText="you'r born on- Wednesday"
+                                    }
+                                else if(sum%7==5){
+                                    display.innerText="you'r born on- Thursday"
+                                    }
+                                else if(sum%7==6){
+                                    display.innerText="you'r born on- Friday"
+                                    }
+                                }
+
+                        else{
+                            if(sum%7==0){
+                                display.innerText="you'r born on- Sunday"
+                                }
+                            else if(sum%7==1){
+                                display.innerText="you'r born on- Monday"
+                                }
+                            else if(sum%7==2){
+                                display.innerText="you'r born on- Tuesday"
+                                }
+                            else if(sum%7==3){
+                                display.innerText="you'r born on- Wednesday"
+                                }
+                            else if(sum%7==4){
+                                display.innerText="you'r born on- Thursday"
+                                }
+                            else if(sum%7==5){
+                                display.innerText="you'r born on- Friday"
+                                }       
+                            else if(sum%7==6){
+                                display.innerText="you'r born on- Saturday"
+                                }
+                            }
+                        }
+
+                    else{
+                        if(sum%7==0){
+                            display.innerText="you'r born on- Sunday"
+                            }
+                        else if(sum%7==1){
+                            display.innerText="you'r born on- Monday"
+                            }
+                        else if(sum%7==2){
+                            display.innerText="you'r born on- Tuesday"
+                            }
+                        else if(sum%7==3){
+                            display.innerText="you'r born on- Wednesday"
+                            }
+                        else if(sum%7==4){
+                            display.innerText="you'r born on- Thursday"
+                            }
+                        else if(sum%7==5){
+                            display.innerText="you'r born on- Friday"
+                            }
+                        else if(sum%7==6){
+                            display.innerText="you'r born on- Saturday"
+                            }
+                        }
+                    }
+                }
+            }
+    </script>
+</body>
+</html>
